@@ -3,12 +3,10 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import { MotionDiv } from '../MotionDiv/MotionDiv';
-import getAnimeProducer from '@/hooks/getAnimeProducer';
+import CardHover from '../CardHover/CardHover';
 
 
 const AnimeCard = ({ data, title }) => {
-
-    console.log(data)
 
     const [showCardHover, setShowCardHover] = useState(false);
 
@@ -40,18 +38,18 @@ const AnimeCard = ({ data, title }) => {
                     onMouseEnter={() => setShowCardHover(true)}
                     onMouseLeave={() => setShowCardHover(false)}
                 />
-            </MotionDiv>
+
+            </MotionDiv >
             {title &&
                 <div className='mt-2'>
                     <h2 className='font-semibold text-sky-100 line-clamp-2 hover:cursor-pointer'>{data.title}</h2>
-                </div>}
-            {showCardHover && (
-                <div className='relative'>
-                    <div className='absolute z-50 bg-slate-600 w-[225px] h-[150px] -top-80 left-56 rounded-md p-4'>
-
-                    </div>
                 </div>
-            )}
+            }
+            {
+                showCardHover && (
+                    <CardHover data={data} />
+                )
+            }
         </>
     )
 }
