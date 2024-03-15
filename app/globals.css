@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #161925;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: white;
+}
+
+.grid_layout {
+  display: grid;
+  grid-gap: 80px 30px;
+  grid-template-columns: repeat(5, 200px);
+  justify-content: space-between;
+  margin-top: 60px;
+}
