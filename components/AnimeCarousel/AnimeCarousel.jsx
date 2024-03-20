@@ -16,7 +16,7 @@ const AnimeCarousel = ({ animeArray, title, addMargin }) => {
                 }}>
                 <CarouselContent>
                     {animeArray.map((data, index) => (
-                        <CarouselItem key={index} className="h-[200px] sm:h-[400px] basis-1/2 md:basis-1/3 md:h-[500px] 2xl:h-[300px]">
+                        <CarouselItem key={index} className="h-[200px] sm:h-[350px] md:h-[400px] lg:h-[400px] xl:h-[250px] 2xl:h-[300px] basis-1/2 md:basis-1/3 ">
                             <AnimeCard data={data} />
                         </CarouselItem>
                     ))}

@@ -2,11 +2,12 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaAngleDown } from "react-icons/fa6";
 import { MotionDiv } from '../MotionDiv/MotionDiv';
+import { FaAlignLeft } from "react-icons/fa6";
 
 const Filters = () => {
     const router = useRouter()
 
-    const [dropdownOpen, setDropDownOpen] = useState(false);
+    const [mobileFilterDropdownOpen, setMobileFilterDropdownOpen] = useState(false);
     const [search, setSearch] = useState('');
     const [genre, setGenre] = useState('');
     const [status, setStatus] = useState('');
@@ -16,8 +17,8 @@ const Filters = () => {
     const allFilters = ["Search", "Genre", "Status"];
     const allStatusOptions = ['airing', 'complete', 'upcoming'];
 
-    const handleDropDown = () => {
-        setDropDownOpen((prev) => !prev)
+    const handlemobileFilterDropdown = () => {
+        setMobileFilterDropdownOpen((prev) => !prev)
     }
 
     const handleSearch = (e) => {
@@ -73,10 +74,8 @@ const Filters = () => {
         if (filter === 'Search') {
             value = search;
         } else if (filter === 'Status') {
-            // Handle status filter
             value = status;
         } else {
-            // Handle genre filter
             value = genre;
         }
 
@@ -89,10 +88,8 @@ const Filters = () => {
         if (filter === 'Search') {
             placeholder = "search any anime";
         } else if (filter === 'Status') {
-            // Handle status filter
             placeholder = "select";
         } else {
-            // Handle genre filter
             placeholder = "select";
         }
 
@@ -106,9 +103,13 @@ const Filters = () => {
 
     return (
         <>
-            <form className='hidden md:flex h-20 flex-row items-center gap-10 mt-10 w-full' onSubmit={handleSearch}>
-                {allFilters.map((filter) => (
-                    <div>
+            <div className='md:hidden h-10 w-10 bg-sky-900 rounded-lg mt-5 flex justify-center items-center' onClick={handlemobileFilterDropdown}>
+                <FaAlignLeft className={`text-2xl ${mobileFilterDropdownOpen ? "text-sky-500" : "text-white"}`} />
+            </div>
+
+            <form className={`${mobileFilterDropdownOpen ? "" : "hidden"} md:flex min-h-20 flex-col md:flex-row items-center gap-10 mt-5 md:mt-10 w-full`} onSubmit={handleSearch}>
+                {allFilters.map((filter, index) => (
+                    <div key={index} className='mb-2 md:mb-0'>
                         <h2 className='mb-2 font-medium'>{filter}</h2>
                         <div className=' bg-slate-600 h-10 w-[200px] rounded-md flex items-center px-5'>
                             <input className='bg-transparent h-full w-full focus:outline-none font-medium'
@@ -163,56 +164,6 @@ const Filters = () => {
                 </div>
 
             </form >
-
-            {
-                dropdownOpen ? (
-                    <>
-                        <div className='md:hidden'>
-                            <div className='flex items-center gap-2'>
-                                <h1 className='text-xl'>Filters</h1>
-
-
-                            </div>
-                            <div className='flex flex-col gap-3 mt-5 w-full'>
-                                <div>
-                                    <h2 className='mb-2'>Search</h2>
-                                    <div className=' bg-slate-500 h-10 w-[200px] rounded-md'>
-                                        <input className='bg-transparent h-full w-full px-5 focus:outline-none'
-                                            type="text"
-                                            placeholder='any anime' />
-                                    </div>
-                                </div>
-                                <div>
-                                    <h2 className='mb-2'>Genre</h2>
-                                    <div className=' bg-slate-500 h-10 w-[200px] rounded-md'>
-                                        <input className='bg-transparent h-full w-full px-5 focus:outline-none'
-                                            type="text"
-                                            placeholder='select' />
-                                    </div>
-                                </div>
-                                <div>
-                                    <h2 className='mb-2'>Status</h2>
-                                    <div className=' bg-slate-500 h-10 w-[200px] rounded-md'>
-                                        <input className='bg-transparent h-full w-full px-5 focus:outline-none'
-                                            type="text"
-                                            placeholder='select' />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </>
-                ) : (
-                    <>
-                        <div className='md:hidden'>
-                            <div className='md:hidden flex flex-row items-center gap-2'>
-                                <h1 className='text-xl md:hidden'>Filters</h1>
-
-                            </div>
-                        </div>
-
-                    </>
-                )}
         </>
     )
 }

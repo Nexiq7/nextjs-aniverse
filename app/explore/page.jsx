@@ -17,7 +17,7 @@ const Page = () => {
     const query = `?status=${status}&q=${search}&order_by=popularity&sort=asc&sfw=true&limit=25`;
 
     return (
-        <main className="flex min-h-screen flex-col px-64">
+        <main className="flex min-h-screen flex-col 2xl:px-64 px-6">
             <Filters />
             <AnimeCardMap query={query} />
         </main>
