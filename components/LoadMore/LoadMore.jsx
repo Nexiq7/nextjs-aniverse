@@ -40,7 +40,7 @@ const LoadMore = ({ query }) => {
     return (
         <>
             {data.map((item, index) => (
-                <div key={index} className='h-[300px]'>
+                <div key={index} className='h-[200px] xl:h-[300px]'>
                     <AnimeCard data={item} title={true} />
                 </div>
             ))}
