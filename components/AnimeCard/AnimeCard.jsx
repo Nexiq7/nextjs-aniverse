@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image';
 import { MotionDiv } from '../MotionDiv/MotionDiv';
 import CardHover from '../CardHover/CardHover';
+import Link from 'next/link';
 
 
 const AnimeCard = ({ data, title }) => {
@@ -29,16 +30,16 @@ const AnimeCard = ({ data, title }) => {
                 }}
                 viewport={{ amount: 0 }}
             >
-
-                <Image
-                    style={{ objectFit: "cover" }}
-                    src={data.images.jpg.large_image_url}
-                    fill
-                    alt='Image'
-                    onMouseEnter={() => setShowCardHover(true)}
-                    onMouseLeave={() => setShowCardHover(false)}
-                />
-
+                <Link href={`/explore/${data.mal_id}`}>
+                    <Image
+                        style={{ objectFit: "cover" }}
+                        src={data.images.jpg.large_image_url}
+                        fill
+                        alt='Image'
+                        onMouseEnter={() => setShowCardHover(true)}
+                        onMouseLeave={() => setShowCardHover(false)}
+                    />
+                </Link>
             </MotionDiv >
             {title &&
                 <div className='mt-2'>
