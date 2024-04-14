@@ -1,12 +1,30 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Searchbar from '../Searchbar/Searchbar'
 import UserNavigation from '../UserNavigation/UserNavigation'
 import PageNavigation from '../PageNavigation/PageNavigation'
+import { getProfile } from '@/lib/utils'
 
 
 const Navbar = () => {
+
+    const [user, setUser] = useState(null);
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const fetchedUser = await getProfile();
+                setUser(fetchedUser);
+            } catch (error) {
+                console.error('Error fetching current user:', error);
+                setUser(null);
+            }
+        };
+
+        fetchUser();
+    }, [isUserLoggedIn, setUser]);
 
 
     return (
@@ -18,9 +36,8 @@ const Navbar = () => {
                 <Searchbar />
             </div>
             <div className='basis-1/3 flex justify-end'>
-                <UserNavigation />
+                <UserNavigation user={user} setIsUserLoggedIn={setIsUserLoggedIn} setUser={setUser} />
             </div>
-
         </div>
     )
 }

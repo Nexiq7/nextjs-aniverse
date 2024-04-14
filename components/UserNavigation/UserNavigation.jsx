@@ -1,15 +1,28 @@
 "use client"
-import Image from 'next/image';
+import { useState } from 'react';
+import ModalHandler from '../Modal/ModalHandler';
+import UserDropdown from '../UserDropdown/UserDropdown';
 
-export default function UserNavigation() {
+export default function UserNavigation({ user, setIsUserLoggedIn, setUser }) {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
-        <div className='h-9 w-9 relative rounded-full overflow-hidden'>
-            <Image
-                style={{ objectFit: "cover" }}
-                fill
-                src={"https://i.pinimg.com/564x/a9/ab/95/a9ab95f858cacbe669dd38ae12142a5d.jpg"}
-            />
-        </div>
+        <>
+            {user?.username ? (
+                <UserDropdown user={user} setIsUserLoggedIn={setIsUserLoggedIn} setUser={setUser} />
+            ) : (
+                <div>
+                    <button className='h-full flex items-center text-[15px] sm:text-[18px] bg-transparent transition-all duration-200 ease-in-out rounded-xl tracking-wide px-5 py-1 font-normal border-2 border-sky-700 hover:border-sky-500' onClick={() => {
+                        setIsModalOpen(true);
+                    }}>Register</button>
+                </div>
+            )
+            }
+            {isModalOpen &&
+                <ModalHandler setIsModalOpen={setIsModalOpen} setIsUserLoggedIn={setIsUserLoggedIn} />
+            }
+        </>
     )
 }
 

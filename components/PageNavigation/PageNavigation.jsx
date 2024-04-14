@@ -17,8 +17,16 @@ const PageNavigation = () => {
     };
 
     const links = [
-        { category: 'Explore', description: 'The Aniverse is huge, enjoy exploring', href: '/explore' },
-        { category: 'Watchlist', description: 'Keep track of the animies you want to watch', href: '/' },
+        {
+            category: 'Explore',
+            description: 'The Aniverse is huge, enjoy exploring',
+            href: '/explore'
+        },
+        {
+            category: 'Watchlist',
+            description: 'Keep track of the animies you want to watch',
+            href: '/watchlist'
+        },
     ];
 
     return (
