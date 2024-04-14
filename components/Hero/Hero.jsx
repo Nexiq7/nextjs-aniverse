@@ -1,14 +1,15 @@
 import React from 'react'
 import AnimeCarousel from '../AnimeCarousel/AnimeCarousel';
-import { fetchAnimeData } from '../../ServerActions/Action';
+import { getAnimeDataOnServer } from '../../ServerActions/getAnimeDataOnServer';
 import Link from 'next/link';
 import { FaArrowRight } from "react-icons/fa";
 
 
 const Hero = async () => {
 
-    const topAiring = await fetchAnimeData("?status=airing&order_by=popularity&sort=asc&sfw=true&limit=9");
-    const topAllTime = await fetchAnimeData("?status=complete&order_by=popularity&sort=asc&sfw=true&limit=9");
+    const topAiring = await getAnimeDataOnServer("?status=airing&order_by=popularity&sort=asc&sfw=true&limit=9");
+    const topAllTime = await getAnimeDataOnServer("?status=complete&order_by=popularity&sort=asc&sfw=true&limit=9");
+
 
     return (
         <>
