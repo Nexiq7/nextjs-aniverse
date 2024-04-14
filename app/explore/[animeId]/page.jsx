@@ -186,7 +186,7 @@ const page = () => {
                             {data.data.trailer.youtube_id && (
                                 <div className='flex flex-col'>
                                     <h1 className='text-[24px] text-white font-semibold'>Trailer</h1>
-                                    <YouTubePlayer videoId={data.data.trailer.youtube_id} height={280} width={498} />
+                                    <YouTubePlayer videoId={data.data.trailer.youtube_id} />
                                 </div>
                             )}
                         </div>
