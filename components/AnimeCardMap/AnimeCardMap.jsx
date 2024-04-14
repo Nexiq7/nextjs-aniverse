@@ -1,12 +1,12 @@
 import React from 'react'
-import getAnimeData from '../../hooks/getAnimeData';
 import AnimeCard from '../AnimeCard/AnimeCard';
 import { ClipLoader } from 'react-spinners';
 import LoadMore from '../LoadMore/LoadMore';
+import useAnimeData from '@/hooks/useAnimeData';
 
 const AnimeCardMap = ({ query }) => {
 
-    const { data, isLoading, error } = getAnimeData(query);
+    const { data, isLoading, error } = useAnimeData(query);
 
     if (isLoading) {
         return (
@@ -15,7 +15,7 @@ const AnimeCardMap = ({ query }) => {
             </div>
         )
     }
-
+    useAnimeData
     if (error) return <p>{error}</p>;
 
     return (
