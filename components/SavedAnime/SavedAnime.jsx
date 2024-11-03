@@ -22,7 +22,7 @@ const SavedAnime = ({ animeId, handleDeleteSavedAnime }) => {
             <div className='flex gap-10'>
                 <div>
                     <Image
-                        src={data.data.images.jpg.large_image_url}
+                        src={data?.data?.images?.jpg.large_image_url}
                         width={50}
                         height={50}
                         alt='SavedAnime'
