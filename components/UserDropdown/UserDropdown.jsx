@@ -20,8 +20,6 @@ const UserDropdown = ({ user, setIsUserLoggedIn, setUser }) => {
     };
 
     const links = [
-        { category: 'Profile', href: '/explore' },
-        { category: 'Settings', href: '/' },
     ];
 
     const logout = async () => {

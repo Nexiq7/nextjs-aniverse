@@ -30,8 +30,8 @@ const Hero = async () => {
                         <AnimeCarousel title={"top finished"} animeArray={topAllTime.data} addMargin={true} />
                     </div>
                 </div >
-                <div className='h-64 w-64 sm:h-96 sm:w-96 bg-indigo-800 rounded-full absolute bottom-0 right-0 blur-[200px] -z-10'></div>
-                <div className='h-48 w-48 sm:h-64 sm:w-64 bg-sky-500 rounded-full absolute bottom-0 right-96 blur-[200px] -z-10'></div>
+                <div className='h-64 w-64 sm:h-96 sm:w-96 rounded-full absolute bottom-0 right-0 blur-[200px] -z-10'></div>
+                <div className='h-48 w-48 sm:h-64 sm:w-64 rounded-full absolute bottom-0 right-96 blur-[200px] -z-10'></div>
             </div>
         </>
     )

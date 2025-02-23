@@ -29,7 +29,7 @@ const SavedAnime = ({ animeId, handleDeleteSavedAnime }) => {
                         className='rounded-md overflow-hidden' />
                 </div>
                 <div>
-                    <h1 className='text-[18px]'>{data.data.title}</h1>
+                    <h1 className='text-[18px]'>{data?.data?.title}</h1>
                     {data.data.genres && (
                         <GenresMap genres={data.data.genres} />
                     )}

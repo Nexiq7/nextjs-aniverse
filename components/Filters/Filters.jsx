@@ -3,19 +3,39 @@ import { useRouter } from 'next/navigation'
 import { FaAngleDown } from "react-icons/fa6";
 import { MotionDiv } from '../MotionDiv/MotionDiv';
 import { FaAlignLeft } from "react-icons/fa6";
+import { getAnimeGenres } from '@/lib/utils';
 
 const Filters = () => {
     const router = useRouter()
-
     const [mobileFilterDropdownOpen, setMobileFilterDropdownOpen] = useState(false);
     const [search, setSearch] = useState('');
-    const [genre, setGenre] = useState('');
+    const [genre, setGenre] = useState();
     const [status, setStatus] = useState('');
     const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
-
+    const [isGenreDropdownOpen, setIsGenreDropdownOpen] = useState(false);
+    const [allGenreOptions, setAllGenreOptions] = useState([]);
 
     const allFilters = ["Search", "Genre", "Status"];
     const allStatusOptions = ['airing', 'complete', 'upcoming'];
+
+
+    const getGenres = async () => {
+        try {
+            const data = await getAnimeGenres();
+            setAllGenreOptions(data.data.map(({ mal_id, name }) => ({ id: mal_id, genre: name })));
+        } catch (error) {
+            console.error("Error fetching genres:", error);
+        }
+    };
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            getGenres();
+        }, 1000);
+
+        return () => clearTimeout(timeout);
+    }, []);
+
 
     const handlemobileFilterDropdown = () => {
         setMobileFilterDropdownOpen((prev) => !prev)
@@ -36,7 +56,7 @@ const Filters = () => {
         }
 
         if (genre) {
-            searchParams.set('genre', genre);
+            searchParams.set('genre', genre.id);
         } else {
             searchParams.delete('genre');
         }
@@ -76,7 +96,7 @@ const Filters = () => {
         } else if (filter === 'Status') {
             value = status;
         } else {
-            value = genre;
+            value = genre?.name;
         }
 
         return value;
@@ -118,6 +138,12 @@ const Filters = () => {
                                 onChange={(e) => setFilter(filter, e)}
                                 value={setValueBasedOnFilter(filter)}
                             />
+                            {filter == "Genre" &&
+                                <FaAngleDown
+                                    className='text-[20px] text-sky-300 hover:text-sky-600 transition-all ease-in-out duration-200 mt-1 h-56'
+                                    onClick={() => { setIsGenreDropdownOpen(prev => !prev) }}
+                                />
+                            }
                             {filter == "Status" &&
                                 <FaAngleDown
                                     className='text-[20px] text-sky-300 hover:text-sky-600 transition-all ease-in-out duration-200 mt-1'
@@ -126,6 +152,35 @@ const Filters = () => {
                             }
 
                         </div>
+                        {isGenreDropdownOpen & filter == "Genre" ? (
+                            <MotionDiv
+                                className='h-56 absolute bg-slate-600 w-[200px] rounded-md z-50 mt-2 p-2 overflow-y-auto'
+                                variants={variants}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{
+                                    delay: 0,
+                                    ease: 'easeInOut',
+                                    duration: 0.3,
+                                }}
+                                viewport={{ amount: 0 }}
+                            >
+                                <div>
+                                    {allGenreOptions.map((option) => (
+                                        <div
+                                            key={option.id}
+                                            className='h-10 flex items-center hover:bg-sky-900 rounded-md p-2 font-medium cursor-pointer'
+                                            onClick={() => {
+                                                setGenre({ id: option.id, name: option.genre });
+                                                setIsGenreDropdownOpen(false);
+                                            }}
+                                        >
+                                            {option.genre}
+                                        </div>
+                                    ))}
+                                </div>
+                            </MotionDiv>
+                        ) : (null)}
                         {isStatusDropdownOpen & filter == "Status" ? (
                             <MotionDiv
                                 className='absolute bg-slate-600 w-[200px] rounded-md z-50 mt-2 p-2'
