@@ -30,7 +30,7 @@ const page = () => {
     const deleteSavedAnime = async (username, animeId) => {
 
         try {
-            const response = await fetch('http://localhost:5000/saved/removeSavedAnime', {
+            const response = await fetch('https://nestjs-aniverse-production.up.railway.app/saved/removeSavedAnime', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

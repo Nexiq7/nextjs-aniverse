@@ -27,7 +27,7 @@ const LoginModal = ({ setIsModalOpen, setModalTypeRegister, setIsUserLoggedIn })
         };
 
         try {
-            const response = await fetch('http://localhost:5000/auth/login', {
+            const response = await fetch('https://nestjs-aniverse-production.up.railway.app/auth/login', {
                 method: 'POST',
                 credentials: "include",
                 headers: {

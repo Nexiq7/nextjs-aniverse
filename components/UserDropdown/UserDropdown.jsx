@@ -25,7 +25,7 @@ const UserDropdown = ({ user, setIsUserLoggedIn, setUser }) => {
     const logout = async () => {
 
         try {
-            const response = await fetch('http://localhost:5000/auth/logout', {
+            const response = await fetch('https://nestjs-aniverse-production.up.railway.app/auth/logout', {
                 method: 'GET',
                 credentials: "include",
             });

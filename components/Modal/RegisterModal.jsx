@@ -29,7 +29,7 @@ const RegisterModal = ({ setIsModalOpen, setModalTypeRegister }) => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/users/register', {
+            const response = await fetch('https://nestjs-aniverse-production.up.railway.app/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
